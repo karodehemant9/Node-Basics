@@ -1,5 +1,13 @@
-console.log('Hello World');
+let productOfTwo = (num1, num2) => num1*num2;
+console.log(productOfTwo(4,7));
 
-// execute it on node terminal like:
-// node first-app.js
-// Output = Hello World
+
+const student = {
+    name: 'Hemant',
+    age: 25,
+    greet(){
+        console.log(`Hi ${this.name}, how are you?`)
+    }
+}
+
+student.greet();
