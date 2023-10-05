@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const requestHandler = ((req, res) =>{
+const requestHandler = (request, response) =>{
     const url = request.url;
     const method = request.method;
   
@@ -24,7 +24,7 @@ const requestHandler = ((req, res) =>{
 
     return request.on('end', (err) => {
         const parsedBody = Buffer.concat(body).toString();
-        const message = parsedBody.split('=')[1];
+        const message = parsedBody.split('=')[0];
         fs.writeFile('message.txt', message , () =>{
         response.statusCode = 302;
         response.setHeader('Location', '/');
@@ -39,18 +39,7 @@ const requestHandler = ((req, res) =>{
     response.write('<body><h1>Hello from my Node.js Server!</h1></body>');
     response.write('</html>');
     response.end();
-})
+}
 
 
-//we can import this requestHandler from any other file
 module.exports = requestHandler;
-
-//we are exporting here in form of an object
-// module.exports = {
-//     handler: requestHandler,
-//     someText: 'some hardcoded text'
-// }
-
-//we are exporting here as individual properties
-// module.exports.handler = requestHandler;
-// module.exports.someText = 'some hardcoded text';
